@@ -6,7 +6,7 @@
 export APACHE_RUN_USER=www-data
 export APACHE_RUN_GROUP=www-data
 export APACHE_PID_FILE=/var/run/apache2.pid
-export APACHE_LOG_DIR=<%= log_directory %>
+export APACHE_LOG_DIR=/var/log/<%= log_directory %>
 
 ## The locale used by some modules like mod_dav
 export LANG=C
