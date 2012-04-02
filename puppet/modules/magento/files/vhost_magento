@@ -1,3 +1,4 @@
+# vim: syntax=apache
 <VirtualHost *:80>
    DocumentRoot "/vagrant/magento"
    ServerName vagrant-magento
