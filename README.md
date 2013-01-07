@@ -1,14 +1,12 @@
 Getting started
 ---------------
 
-    vagrant up --no-provision
-    vagrant ssh
-    sudo apt-get update
-    exit
     vagrant up
+    vagrant reload
 
 if you have networking problems:
 
+    vagrant ssh
     sudo /etc/init.d/networking restart
 
 Using your magento project
@@ -21,5 +19,3 @@ git-clone your magento to `data/magento`, import your mysql database run the que
     where path in ('web/unsecure/base_url', 'web/secure/base_url')
 
 and clear the magento cache (`var/cache/`)
-
-Now have fun (kind of hard considering it's magento, but hey.. at least you didn't pollute your computer with this shit).
