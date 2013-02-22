@@ -30,9 +30,9 @@ Vagrant::Config.run do |config|
   # Set the Timezone to something useful
   config.vm.provision :shell, :inline => "echo \"America/Denver\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
   # Update the server
-  config.vm.provision :shell, :inline => "apt-get update --fix-missing"
+  # config.vm.provision :shell, :inline => "apt-get update --fix-missing"
   
-  config.vm.provision :shell, :inline => "apt-get install git"
+  # config.vm.provision :shell, :inline => "apt-get install git"
 
   config.vm.provision :puppet do |puppet|
      puppet.pp_path = "/tmp/vagrant-puppet"
