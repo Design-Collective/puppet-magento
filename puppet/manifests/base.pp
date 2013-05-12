@@ -4,7 +4,6 @@ group { "puppet":
 
 class { "apache2":
     document_root => "/vagrant",
-    log_directory => "apache2"
 }
 
 /**
