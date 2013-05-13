@@ -1,8 +1,8 @@
 # vim: syntax=apache
 <VirtualHost *:80>
-   DocumentRoot "/vagrant/magento"
+   DocumentRoot "/vagrant/www/magento"
    ServerName vagrant-magento
-   <Directory "/vagrant/magento">
+   <Directory "/vagrant/www/magento">
        Options +FollowSymLinks
        AllowOverride All
        Order allow,deny
@@ -18,6 +18,6 @@
        RewriteRule .* /index.php
    </Directory>
    SetEnv MAGE_IS_DEVELOPER_MODE ""
-   ErrorLog /var/log/apache2/magento/error.log
-   CustomLog /var/log/apache2/magento/access.log combined
+   ErrorLog /var/log/apache2/error.log
+   CustomLog /var/log/apache2/access.log combined
 </VirtualHost>
