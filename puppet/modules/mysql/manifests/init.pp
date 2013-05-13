@@ -1,11 +1,12 @@
 class mysql( $root_password ) {
 
+    # Install the MySQL server and client
     package { "mysql-server": ensure => latest }
     package { "mysql-client": ensure => latest }
 
-    file { 
-        "/etc/mysql/my.cnf":
-            content => template("mysql/my_cnf.erb")
+    # Add the MySQL configuration file
+    file { "/etc/mysql/my.cnf":
+        content => template("mysql/my_cnf.erb")
     } 
 
     exec { "Set MySQL server root password":
@@ -17,9 +18,9 @@ class mysql( $root_password ) {
     }
 
     exec { "Create vagrant user":
-      unless => "/usr/bin/mysqladmin -uvagrant -pvagrant status",
-      command => "/usr/bin/mysql -uroot -p${root_password} -e \"CREATE USER vagrant@'%' IDENTIFIED BY 'vagrant'; Grant all on *.* TO vagrant@'%';\"",
-      require => Service["mysql"],
+       unless => "/usr/bin/mysqladmin -uvagrant -pvagrant status",
+       command => "/usr/bin/mysql -uroot -p${root_password} -e \"CREATE USER vagrant@'localhost' IDENTIFIED BY 'vagrant'; Grant all on *.* TO vagrant@'%';\"",
+       require => Service["mysql"],
     }
 
     service { "mysql":
