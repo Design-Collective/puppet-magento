@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant"
 
   # Set the virtual machine host name
-  # config.vm.hostname = "development.vm"
+  config.vm.hostname = "development.vm"
 
 
   # ADDITIONAL CONFIGURATIONS
