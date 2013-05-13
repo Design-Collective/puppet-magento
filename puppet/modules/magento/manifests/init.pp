@@ -1,17 +1,17 @@
 class magento {
 
-   file { "/etc/apache2/sites-available/vagrant-magento":
-     source => 'puppet:///modules/magento/vhost_magento'
-   }
+    file { "/etc/apache2/sites-available/vagrant-magento":
+        source => '/vagrant/puppet/modules/magento/files/vhost_magento',
+        require => Package["apache2"],
+        notify  => Service["apache2"],
+    }
 
-   file { "/etc/apache2/sites-enabled/vagrant-magento":
-     ensure => 'link',
-     target => '/etc/apache2/sites-available/vagrant-magento'
-   }
+    file { "/etc/apache2/sites-enabled/vagrant-magento":
+        ensure => 'link',
+        target => '/etc/apache2/sites-available/vagrant-magento',
+        require => Package["apache2"],
+        notify  => Service["apache2"],
+    }
 
-   file { "/var/log/apache2/magento":
-     ensure => 'directory'
-   }
-
-   exec { "/usr/sbin/a2enmod rewrite": }
+    exec { "/usr/sbin/a2enmod rewrite": }
 }
