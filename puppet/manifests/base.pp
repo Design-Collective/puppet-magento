@@ -3,7 +3,7 @@ group { "puppet":
 }
 
 class { "apache2":
-    document_root => "/vagrant",
+    document_root => "/vagrant/www",
 }
 
 /**
