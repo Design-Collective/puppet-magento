@@ -12,7 +12,7 @@ Create local vagrant dir:
     
 Get vagrant & puppet Magento setup code:
 
-    git clone https://github.com/jameskleinschnitz/magento-vagrant-puppet.git site_dir
+    git clone https://github.com/matthewsplant/magento-vagrant-puppet.git site_dir
     cd site_dir
     
 Run initial vagrant setup:
