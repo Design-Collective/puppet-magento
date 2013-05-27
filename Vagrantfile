@@ -38,7 +38,6 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder ".", "/vagrant" # DEFAULT
   # config.vm.synced_folder ".", "/vagrant", :nfs => true
-  config.vm.synced_folder ".", "/vagrant"
 
   # Set the virtual machine host name
   config.vm.hostname = "development.vm"
