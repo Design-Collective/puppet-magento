@@ -1,22 +1,17 @@
 class apache2( $document_root ) {
 
-    file { "/etc/apache2/sites-available/default":
-        content => template("apache2/vhost_default.erb")
+    package { 'apache2':
+        ensure => installed,
+        before => File['/etc/apache2/sites-available/default'],
     }
 
-    exec { "apt-get update":
-        path => "/usr/bin",
+    file { '/etc/apache2/sites-available/default':
+        ensure  => file,
+        content => template('apache2/vhost_default.erb'),
     }
 
-    package { "apache2":
-        ensure  => present,
-        require => Exec["apt-get update"],
-    }
-
-    service { "apache2":
-        ensure  => "running",
-        hasstatus => true,
-        hasrestart => true,
-        require => Package["apache2"],
+    service { 'apache2':
+        ensure  => 'running',
+        subscribe => File['/etc/apache2/sites-available/default'],
     }
 }

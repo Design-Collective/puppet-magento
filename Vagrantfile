@@ -40,13 +40,14 @@ Vagrant.configure("2") do |config|
   # config.vm.synced_folder ".", "/vagrant", :nfs => true
 
   # Set the virtual machine host name
-  config.vm.hostname = "development.vm"
+  config.vm.hostname = "magento.localhost"
 
 
   # ADDITIONAL CONFIGURATIONS
 
   # Set the timezone
-  config.vm.provision :shell, :inline => "echo \"EST\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
+  config.vm.provision :shell, :inline => "echo \"EST\" |
+    sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
 
 
   # PROVIDER CONFIGS
@@ -78,16 +79,11 @@ Vagrant.configure("2") do |config|
   # You will need to create the manifests directory and a manifest file
   # in the manifests_path directory.
   config.vm.provision :puppet do |puppet|
-    # set provisioning path
     puppet.pp_path = "/tmp/vagrant-puppet"
-    # set manifests path
     puppet.manifests_path = "puppet/manifests"
-    # set manifest file
     puppet.manifest_file  = "base.pp"
-    # set module path
     puppet.module_path    = "puppet/modules"
-    # set verbose and debug command line flags
-    puppet.options = "--verbose --debug"
+    #puppet.options = "--verbose --debug"
   end
 
 
