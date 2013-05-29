@@ -1,5 +1,4 @@
-
-A **standalone Magento DevOps environment** in [VirtualBox](https://www.virtualbox.org/) built with [Vagrant](http://www.vagrantup.com/) and [Puppet](http://puppetlabs.com/) from a vanilla Ubuntu 12.04 LTS box.
+A **standalone Magento DevOps environment** built with [Vagrant](http://www.vagrantup.com/) and [Puppet](http://puppetlabs.com/) from a vanilla Ubuntu 12.04 LTS box.
 
 Leverage [Composer](http://getcomposer.org/) and [Phing](http://www.phing.info/) scripts for enhanced DevOps automation.
 
@@ -7,17 +6,17 @@ Use your own Magento code or have it install the Magento version of your choice.
 
 ## Getting Started
 
-1. Install the required software for your **host** machine:
+1. Install the required software for your **host** machine
  * Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
  * Download and install [Vagrant](http://downloads.vagrantup.com/)
 
-2. Create the parent directory for your projects:
+2. Create the parent directory for your projects
 ```
 mkdir ~/vagrant
 cd ~/vagrant
 ```
-    
-3. Grab the magento-vagrant-puppet code:
+
+3. Grab the magento-vagrant-puppet code
 ```
 git clone https://github.com/matthewsplant/magento-vagrant-puppet.git project_dir
 cd project_dir
@@ -27,25 +26,27 @@ cd project_dir
  * Set install to true in the Magento class of the main puppet manifest file (base.pp)
  * Set the Magento version also in the Magento class of the main puppet manifest file
  * And remember to revert the install back to false after install
- * Add **magento.localhost** to your local hosts /etc/hosts file:
 ```
-127.0.0.1       magento.localhost
+    127.0.0.1       magento.localhost
 ```
 
 5. (Optional) Use your own Magento code
  * "git-clone" your Magento project to "www/magento"
  * Import your MySQL database and update the base URLs via the following MySQL query:
 ```
-    UPDATE magento.core_config_data
-    SET value = 'http://magento.localhost:8080/'
-    WHERE path in ('web/unsecure/base_url', 'web/secure/base_url')
+UPDATE magento.core_config_data
+SET value = 'http://magento.localhost:8080/'
+WHERE path in ('web/unsecure/base_url', 'web/secure/base_url')
 ```
  * Clear the Magento cache
 
-6. **Spin up your new Magento DevOps environment**:
+6. Add *magento.localhost* to your hosts /etc/hosts file
+
+7. **Spin up your new DevOps environment**
 ```
     vagrant up
 ```
+
 
 ## FAQ's
 
