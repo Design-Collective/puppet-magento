@@ -27,9 +27,6 @@ cd project_dir
  * Set install to true in the Magento class of the main puppet manifest file (base.pp)
  * Set the Magento version also in the Magento class of the main puppet manifest file
  * And remember to revert the install back to false after install
-```
-    127.0.0.1       magento.localhost
-```
 
 5. (Optional) Use your own Magento code
  * "git-clone" your Magento project to "www/magento"
@@ -42,6 +39,9 @@ WHERE path in ('web/unsecure/base_url', 'web/secure/base_url')
  * Clear the Magento cache
 
 6. Add *magento.localhost* to your hosts /etc/hosts file
+```
+    127.0.0.1       magento.localhost
+```
 
 7. **Spin up your new DevOps environment**
 ```
