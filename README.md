@@ -48,8 +48,11 @@ WHERE path in ('web/unsecure/base_url', 'web/secure/base_url')
     vagrant up
 ```
 
+## Security Note
 
-## FAQ's
+This virtual machine is optimized for ease of use.  Therefore it is not meant for production use.
+
+## FAQ
 
 #### Credentials (set in the main puppet manifest file)
  * MySQL root/r00t
@@ -62,7 +65,9 @@ WHERE path in ('web/unsecure/base_url', 'web/secure/base_url')
  * MySQL 5.5.31
  * PHP 5.3.10
  * Composer
- * Phing 2.5.0
+ * Phing 2.5.0 
+
+See http://magento.localhost:8080/phpinfo.php for more details.
 
 #### Why didn't you put the "puppet" directory in the vendor directory?
  * It was this way
