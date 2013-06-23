@@ -47,6 +47,12 @@ WHERE path in ('web/unsecure/base_url', 'web/secure/base_url')
 ```
     vagrant up
 ```
+8. (Optional) Install Phing along with additional support libraries on your new DevOps environment
+```
+vagrant ssh
+cd /vagrant
+composer install
+```
 
 ## Security Note
 
