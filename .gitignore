@@ -1,4 +1,6 @@
+.idea
 .vagrant
 puppet
 vendor
-www
+www/magento
+

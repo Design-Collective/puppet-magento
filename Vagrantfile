@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder ".", "/vagrant" # DEFAULT
-  # config.vm.synced_folder ".", "/vagrant", :nfs => true
+  config.vm.synced_folder ".", "/vagrant", :extra => "dmode=777,fmode=777" # VirtualBox shared directory workaround
 
   # Set the virtual machine host name
   config.vm.hostname = "magento.localhost"
@@ -65,10 +65,13 @@ Vagrant.configure("2") do |config|
     # vb.gui = true
 
     # set virtual machine name
-    vb.name = "magento-dev-env"
+    vb.name = "magento-devops"
 
     # increase virtual machine memory
-    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    #vb.customize ["modifyvm", :id, "--memory", "1024"]
+    #vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--memory", "4096"]
+    #vb.customize ["modifyvm", :id, "--memory", "9192"]
   end
 
 
