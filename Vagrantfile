@@ -82,7 +82,7 @@ Vagrant.configure("2") do |config|
   # You will need to create the manifests directory and a manifest file
   # in the manifests_path directory.
   config.vm.provision :puppet do |puppet|
-    puppet.pp_path = "/tmp/vagrant-puppet"
+  #  puppet.pp_path = "/tmp/vagrant-puppet"
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "base.pp"
     puppet.module_path    = "puppet/modules"
