@@ -61,8 +61,8 @@ This virtual machine is optimized for ease of use.  Therefore it is not meant fo
 ## FAQ
 
 #### Credentials (set in the main puppet manifest file)
- * MySQL root/r00t
- * MySQL vagrant/vagrant
+ * Ubuntu User - vagrant/vagrant
+ * MySQL User - root/r00t
  * Magento Admin - admin/123123abc
 
 #### Virtual Machine Specifications
