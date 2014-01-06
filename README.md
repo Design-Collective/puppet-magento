@@ -8,7 +8,7 @@ Use your own Magento code or have it install the Magento version of your choice.
 
 1. Install the required software for your **host** machine
  * Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
- * Download and install [Vagrant](http://downloads.vagrantup.com/)
+ * Download and install [Vagrant](http://www.vagrantup.com/downloads.html)
  * Download and install [Git](http://git-scm.com/downloads)
 
 2. Create the parent directory for your projects
