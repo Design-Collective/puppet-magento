@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder ".", "/vagrant" # DEFAULT
-  config.vm.synced_folder ".", "/vagrant", :extra => "dmode=777,fmode=777" # VirtualBox shared directory workaround
+  config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777,fmode=777"] # VirtualBox shared directory workaround
 
   # Set the virtual machine host name
   config.vm.hostname = "magento.localhost"
@@ -82,7 +82,7 @@ Vagrant.configure("2") do |config|
   # You will need to create the manifests directory and a manifest file
   # in the manifests_path directory.
   config.vm.provision :puppet do |puppet|
-    puppet.pp_path = "/tmp/vagrant-puppet"
+  #  puppet.pp_path = "/tmp/vagrant-puppet"
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "base.pp"
     puppet.module_path    = "puppet/modules"

@@ -37,7 +37,7 @@ class { 'mysql':
  */
 class { 'magento':
     /* install magento [true|false] */
-    install =>  true,
+    install =>  false,
 
     /* magento version */
     version     => '1.8.0.0-alpha1',
