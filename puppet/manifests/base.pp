@@ -40,7 +40,7 @@ class { 'magento':
     install =>  false,
 
     /* magento version */
-    version     => '1.8.0.0-alpha1',
+    version     => '1.8.1.0',
     #version    => '1.7.0.2',
     #version    => '1.7.0.1',
     #version    => '1.7.0.0',
