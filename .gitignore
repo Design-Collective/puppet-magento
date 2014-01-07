@@ -1,6 +1,5 @@
 .idea
 .vagrant
-puppet
 vendor
 www/magento
 
