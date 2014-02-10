@@ -13,8 +13,8 @@ Use your own Magento code or have it install the Magento version of your choice.
 
 2. Create the parent directory for your projects
 ```
-mkdir ~/vagrant
-cd ~/vagrant
+mkdir ~/Code
+cd ~/Code
 ```
 
 3. Grab the magento-vagrant-puppet code
