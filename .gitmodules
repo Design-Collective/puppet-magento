@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 [submodule "puppet/modules/puppet-redis"]
 	path = puppet/modules/puppet-redis
 	url = https://github.com/fsalum/puppet-redis.git
+=======
+[submodule "puppet/modules/redis"]
+	path = puppet/modules/redis
+	url = git@github.com:fsalum/puppet-redis.git
+>>>>>>> 7da6100c61f408c1e80bb171948649620ec442ec
