@@ -22,7 +22,7 @@ group { 'puppet':
 }
 
 class { 'apache2':
-    document_root => '/vagrant/www',
+    document_root => '/vagrant/www/magento',
 }
 
 /**
