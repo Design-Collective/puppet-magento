@@ -22,7 +22,7 @@ group { 'puppet':
 }
 
 class { 'apache2':
-    document_root => '/vagrant/www/magento',
+    document_root => '/vagrant/www',
 }
 
 /**
@@ -37,7 +37,7 @@ class { 'mysql':
  */
 class { 'magento':
     /* install magento [true|false] */
-    install =>  true,
+    install =>  false,
 
     /* magento version */
     version     => '1.8.1.0',
@@ -63,6 +63,11 @@ class { 'magento':
 }
 
 /**
+* Redis config with default info
+*/
+class { 'redis': }
+
+/**
  * Import modules
  */
 include apt
@@ -71,3 +76,4 @@ include apache2
 include php5
 include composer
 include magento
+include redis

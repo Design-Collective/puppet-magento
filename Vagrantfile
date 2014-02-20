@@ -69,8 +69,8 @@ Vagrant.configure("2") do |config|
 
     # increase virtual machine memory
     #vb.customize ["modifyvm", :id, "--memory", "1024"]
-    #vb.customize ["modifyvm", :id, "--memory", "2048"]
-    vb.customize ["modifyvm", :id, "--memory", "4096"]
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    #vb.customize ["modifyvm", :id, "--memory", "4096"]
     #vb.customize ["modifyvm", :id, "--memory", "9192"]
   end
 
@@ -86,7 +86,7 @@ Vagrant.configure("2") do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "base.pp"
     puppet.module_path    = "puppet/modules"
-    #puppet.options = "--verbose --debug"
+    puppet.options = "--verbose --debug"
   end
 
 
