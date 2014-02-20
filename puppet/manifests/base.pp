@@ -33,11 +33,16 @@ class { 'mysql':
 }
 
 /**
+* Redis config
+*/
+class { 'redis': }
+
+/**
  * Magento config
  */
 class { 'magento':
     /* install magento [true|false] */
-    install =>  true,
+    install =>  false,
 
     /* magento version */
     version     => '1.8.1.0',
@@ -71,3 +76,4 @@ include apache2
 include php5
 include composer
 include magento
+include redis
