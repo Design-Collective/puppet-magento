@@ -11,8 +11,8 @@ exec { 'apt-update':
     command => '/usr/bin/apt-get update'
 }
 
-exec { 'create-magento-directory':
-    command => 'mkdir /srv/www/magento'
+file { "/srv/www/magento":
+    ensure => "directory",
 }
 
 Exec['apt-update'] -> Package <| |>
@@ -27,7 +27,7 @@ group { 'puppet':
 }
 
 class { 'apache2':
-    document_root => '/srv/www/magento',
+    document_root => '/srv/www/',
 }
 
 /**
