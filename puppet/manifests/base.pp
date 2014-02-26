@@ -12,6 +12,9 @@ exec { 'apt-update':
 }
 Exec['apt-update'] -> Package <| |>
 
+exec { 'create-magento-directory':
+    command => 'mkdir /srv/www/magento'
+}
 
 package { 'curl':
     ensure => 'present',
