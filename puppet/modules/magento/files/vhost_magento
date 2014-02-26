@@ -1,8 +1,8 @@
 # vim: syntax=apache
 <VirtualHost *:80>
-   DocumentRoot "/vagrant/www/magento"
+   DocumentRoot "/srv/www/magento"
    ServerName vagrant-magento
-   <Directory "/vagrant/www/magento">
+   <Directory "/srv/www/magento">
        Options +FollowSymLinks
        AllowOverride All
        Order allow,deny
