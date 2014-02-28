@@ -1,0 +1,23 @@
+{
+    "repositories": [
+        {
+           "type": "vcs",
+           "url": "https://github.com/magento-hackathon/magento-composer-installer"
+        },
+        {
+           "type": "git",
+           "url": "https://github.com/Design-Collective/magento-bootstrap-sass"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*",
+        "Design-Collective/magento-bootstrap-sass": "dev-master"
+    },
+    "extra": {
+        "magento-root-dir": "./",
+        "magento-deploystrategy": "copy"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}
