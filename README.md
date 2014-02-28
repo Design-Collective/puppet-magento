@@ -54,6 +54,12 @@ cd /vagrant
 composer install
 ```
 
+## Deployment - Magentify / Capistrano
+
+We magentified this project. For more information deployment through the magentify capistrano script, please visit
+https://github.com/alistairstead/Magentify
+
+
 ## Security Note
 
 This virtual machine is optimized for ease of use.  Therefore it is not meant for production use.
