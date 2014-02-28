@@ -55,10 +55,10 @@ class magento( $install, $db_user, $db_pass, $version, $admin_user, $admin_pass,
                 --db_name \"magentodb\" \
                 --db_user \"${db_user}\" \
                 --db_pass \"${db_pass}\" \
-                --url \"http://magento.localhost:8080/magento\" \
+                --url \"${mage_url}/\" \
                 --use_rewrites \"${use_rewrites}\" \
                 --use_secure \"no\" \
-                --secure_base_url \"http://magento.localhost:8080/magento\" \
+                --secure_base_url \"${mage_secure_base_url}\" \
                 --use_secure_admin \"no\" \
                 --skip_url_validation \"yes\" \
                 --admin_firstname \"Store\" \

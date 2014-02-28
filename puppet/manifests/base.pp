@@ -65,6 +65,8 @@ class { 'magento':
 
     /* use rewrites [yes|no] */
     use_rewrites => 'no',
+    mage_url => 'mage-url-here',
+    mage_secure_url => 'mage-secure-url-here',
 }
 
 /**
