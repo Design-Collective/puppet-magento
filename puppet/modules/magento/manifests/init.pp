@@ -52,17 +52,22 @@ class magento( $install, $install_magento_seed, $sample_data_version, $admin_ema
                 timeout => 600,
                 require => Exec["download-sample-data"],
             }
+            exec { "setting-p-catalog-permissions":
+                command => "/bin/chmod -R o+w /tmp/magento-sample-data-${sample_data_version}",
+                require => Exec["untar-catalog-files"],
+            }
             exec { 'copy-media-catalog-files':
                 cwd     => "${apache2::document_root}/magento/media",
                 command => "sudo cp -R /tmp/magento-sample-data-${sample_data_version}/media/* .",
                 require => [ Exec["setting-permissions"], Exec["download-sample-data"], Exec["download-magento"] ],
             }
+
             exec { 'install-magento-mysql-sample-data':
-                unless  => "/usr/bin/mysql -u${db_user} -p${db_pass} magentodb",
-                command => '/usr/bin/mysql -u${db_user} -p${db_pass} magentodb < /tmp/magento-sample-data-${sample_data_version}/magento_sample_data_for_${sample_data_version}.sql',
-                require => [ Exec["grant-magentodb-db-all"], Service["mysql"], Exec["create-magentodb-db"], Exec["download-sample-data"] ],
+                cwd     => "${apache2::document_root}",
+                command => '/usr/bin/mysql -uroot -pr00t magentodb < /tmp/magento-sample-data-1.6.1.0/magento_sample_data_for_1.6.1.0.sql',
+                require => [ Exec["grant-magentodb-db-localhost"], Service["mysql"], Exec["create-magentodb-db"], Exec["download-sample-data"] ],
             }
-            exec { "install-magento":
+            exec { "install-magento-after-sample":
                 cwd     => "${apache2::document_root}/magento",
                 creates => "${apache2::document_root}/magento/app/etc/local.xml",
                 command => "/usr/bin/php -f install.php -- \
@@ -74,10 +79,10 @@ class magento( $install, $install_magento_seed, $sample_data_version, $admin_ema
                     --db_name \"magentodb\" \
                     --db_user \"${db_user}\" \
                     --db_pass \"${db_pass}\" \
-                    --url \"${mage_url}/\" \
+                    --url \"${mage_url}\" \
                     --use_rewrites \"${use_rewrites}\" \
                     --use_secure \"no\" \
-                    --secure_base_url \"${mage_secure_base_url}/\" \
+                    --secure_base_url \"${mage_secure_base_url}\" \
                     --use_secure_admin \"no\" \
                     --skip_url_validation \"yes\" \
                     --admin_firstname \"Store\" \
@@ -85,16 +90,16 @@ class magento( $install, $install_magento_seed, $sample_data_version, $admin_ema
                     --admin_email \"${admin_email}\" \
                     --admin_username \"${admin_user}\" \
                     --admin_password \"${admin_pass}\"",
-                require => [ Exec["setting-permissions"], Exec["install-magento-mysql-sample-data"], Exec["create-magentodb-db"], Package["php5-cli"] ]
+                require => [ Exec["grant-magentodb-db-localhost"], Exec["setting-permissions"], Exec["install-magento-mysql-sample-data"], Exec["create-magentodb-db"], Exec["grant-magentodb-db-all"], Package["php5-cli"] ]
+            }
+            exec { "register-magento-channel":
+                cwd     => "${apache2::document_root}/magento",
+                onlyif  => "/usr/bin/test `${apache2::document_root}/magento/mage list-channels | wc -l` -lt 2",
+                command => "${apache2::document_root}/magento/mage mage-setup",
+                require => Exec["install-magento-after-sample"],
             }
         }
-
-
-        host { 'set-ip':
-            ip      => '127.0.0.1',
-        }
-
-        if !$install_magento_seed {
+        else {
             exec { "install-magento":
                 cwd     => "${apache2::document_root}/magento",
                 creates => "${apache2::document_root}/magento/app/etc/local.xml",
@@ -120,12 +125,16 @@ class magento( $install, $install_magento_seed, $sample_data_version, $admin_ema
                     --admin_password \"${admin_pass}\"",
                 require => [ Exec["setting-permissions"], Exec["create-magentodb-db"], Package["php5-cli"] ]
             }
+            exec { "register-magento-channel":
+                cwd     => "${apache2::document_root}/magento",
+                onlyif  => "/usr/bin/test `${apache2::document_root}/magento/mage list-channels | wc -l` -lt 2",
+                command => "${apache2::document_root}/magento/mage mage-setup",
+                require => Exec["install-magento"],
+            }
         }
-        exec { "register-magento-channel":
-            cwd     => "${apache2::document_root}/magento",
-            onlyif  => "/usr/bin/test `${apache2::document_root}/magento/mage list-channels | wc -l` -lt 2",
-            command => "${apache2::document_root}/magento/mage mage-setup",
-            require => Exec["install-magento"],
+
+        host { 'set-ip':
+            ip      => '127.0.0.1',
         }
     }
 

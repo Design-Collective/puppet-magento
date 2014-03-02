@@ -43,7 +43,7 @@ class { 'magento':
     /* install magento data [true|false] */
     install_magento_seed =>  true,
     sample_data_version => '1.6.1.0',
-    
+
     /* install magento [true|false] */
     install =>  true,
     /* magento version */
@@ -64,7 +64,7 @@ class { 'magento':
     /* magento admin user */
     admin_email  => 'magento@designcollective.io',
     admin_user  => 'admin',
-    admin_pass  => 'password',
+    admin_pass  => '123123abcde',
 
     /* use rewrites [yes|no] */
     use_rewrites => 'no',
