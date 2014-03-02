@@ -42,6 +42,7 @@ class { 'mysql':
 class { 'magento':
     /* install magento [true|false] */
     install =>  true,
+    install_magento_seed =>  true,
 
     /* magento version */
     version     => '1.8.1.0',
@@ -66,8 +67,8 @@ class { 'magento':
     /* use rewrites [yes|no] */
     use_rewrites => 'no',
     /* Your Domain URL */
-    mage_url => 'http://localhost',
-    mage_secure_url => 'http://localhost',
+    mage_url => 'http://magento.localhost',
+    mage_secure_url => 'http://magento.localhost',
 }
 
 /**
