@@ -85,7 +85,7 @@ class magento( $install, $install_magento_seed, $sample_data_version, $admin_ema
                     --admin_email \"${admin_email}\" \
                     --admin_username \"${admin_user}\" \
                     --admin_password \"${admin_pass}\"",
-                require => [ Exec["setting-permissions"], Exec["create-magentodb-db"], Package["php5-cli"] ]
+                require => [ Exec["setting-permissions"], Exec["install-magento-mysql-sample-data"], Exec["create-magentodb-db"], Package["php5-cli"] ]
             }
         }
 
