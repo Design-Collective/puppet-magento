@@ -42,7 +42,7 @@ class magento( $install, $install_magento_seed, $admin_email, $mage_url, $mage_s
         if $install_magento_seed {
             exec { 'download-catalog-files':
                 cwd     => "/tmp",
-                command => 'command => "/usr/bin/wget https://dl.dropboxusercontent.com/s/75hxarnihpu3k79/magento-seed-download.tar.gz',
+                command => "/usr/bin/wget https://dl.dropboxusercontent.com/s/75hxarnihpu3k79/magento-seed-download.tar.gz",
                 creates => "/tmp/magento-seed-download.tar.gz",
             }
             exec { 'untar-catalog-files':
@@ -88,7 +88,7 @@ class magento( $install, $install_magento_seed, $admin_email, $mage_url, $mage_s
                 --admin_email \"${admin_email}\" \
                 --admin_username \"${admin_user}\" \
                 --admin_password \"${admin_pass}\"",
-            require => [ Exec["setting-permissions"], Exec["create-magentodb-db"], Package["php5-cli"] ],
+            require => [ Exec["setting-permissions"], Exec["install-magento-mysql-sample-data"], Exec["create-magentodb-db"], Package["php5-cli"] ],
         }
 
         exec { "register-magento-channel":
