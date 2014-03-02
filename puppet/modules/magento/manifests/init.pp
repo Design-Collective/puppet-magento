@@ -52,8 +52,7 @@ class magento( $install, $install_magento_seed, $admin_email, $mage_url, $mage_s
             }
             exec { 'copy-media-catalog-files':
                 cwd     => "${apache2::document_root}/magento/media",
-                command => "cp -R /tmp/magento-seed-download/catalog ."
-                creates => "${apache2::document_root}/magento/media/catalog"
+                command => "cp -R /tmp/magento-seed-download/catalog .",
                 require => [ Exec["setting-permissions"], Exec["download-catalog-files"], Exec["download-magento"] ],
             }
             exec { 'install-magento-mysql-sample-data':
