@@ -26,7 +26,7 @@ group { 'puppet':
 }
 
 class { 'apache2':
-    document_root => '/srv/www/',
+    document_root => '/srv/www/magento',
 }
 
 /**
@@ -40,10 +40,12 @@ class { 'mysql':
  * Magento config
  */
 class { 'magento':
+    /* install magento data [true|false] */
+    install_magento_seed =>  true,
+    sample_data_version => '1.6.1.0',
+    
     /* install magento [true|false] */
     install =>  true,
-    install_magento_seed =>  true,
-
     /* magento version */
     version     => '1.8.1.0',
     #version    => '1.7.0.2',
