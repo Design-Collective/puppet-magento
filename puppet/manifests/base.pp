@@ -17,7 +17,6 @@ file { "/srv/www/magento":
 
 Exec['apt-update'] -> Package <| |>
 
-
 package { 'curl':
     ensure => 'present',
 }
@@ -60,19 +59,31 @@ class { 'magento':
     db_pass     => 'magento',
 
     /* magento admin user */
+    admin_email  => 'magento@designcollective.io',
     admin_user  => 'admin',
-    admin_pass  => '123123abc',
+    admin_pass  => 'password',
 
     /* use rewrites [yes|no] */
     use_rewrites => 'no',
-    mage_url => 'mage-url-here',
-    mage_secure_url => 'mage-secure-url-here',
+    /* Your Domain URL */
+    mage_url => 'http://localhost',
+    mage_secure_url => 'http://localhost',
 }
 
 /**
 * Redis config with default info
 */
 class { 'redis': }
+
+/**
+* PHPMyAdmin config with default info
+*/
+#class { phpmyadmin:
+#    enabled          => 'true'
+#    # ip_access_ranges => [ '192.168.1.0/24', '10.30.1.1' ],
+#}
+
+
 
 /**
  * Import modules
@@ -84,3 +95,4 @@ include php5
 include composer
 include magento
 include redis
+#include phpmyadmin

@@ -1,4 +1,4 @@
-class magento( $install, $db_user, $db_pass, $version, $admin_user, $admin_pass, $use_rewrites) {
+class magento( $install, $install_magento_seed, $admin_email, $mage_url, $mage_secure_url, $db_user, $db_pass, $version, $admin_user, $admin_pass, $use_rewrites) {
 
     if $install {
 
@@ -39,6 +39,29 @@ class magento( $install, $db_user, $db_pass, $version, $admin_user, $admin_pass,
             require => Exec["untar-magento"],
         }
 
+        if $install_magento_seed {
+            exec { 'download-catalog-files':
+                cwd     => "/tmp",
+                command => 'command => "/usr/bin/wget https://dl.dropboxusercontent.com/s/75hxarnihpu3k79/magento-seed-download.tar.gz',
+                creates => "/tmp/magento-seed-download.tar.gz",
+            }
+            exec { 'untar-catalog-files':
+                command => "/bin/tar xvzf /tmp/magento-seed-download.tar.gz",
+                timeout => 600,
+                require => Exec["download-catalog-files"],
+            }
+            exec { 'copy-media-catalog-files':
+                cwd     => "${apache2::document_root}/magento/media",
+                command => "cp -R /tmp/magento-seed-download/catalog ."
+                creates => "${apache2::document_root}/magento/media/catalog"
+                require => [ Exec["setting-permissions"], Exec["download-catalog-files"], Exec["download-magento"] ],
+            }
+            exec { 'install-magento-mysql-sample-data':
+                command => 'mysql -u root -p magentodb < /tmp/magento-seed-download/magento_sample_data_for_1.6.1.0.sql',
+                require => [ Exec["create-magentodb-db"], Exec["download-catalog-files"] ],
+            }
+        }
+
         host { 'magento.localhost':
             ip      => '127.0.0.1',
         }
@@ -63,7 +86,7 @@ class magento( $install, $db_user, $db_pass, $version, $admin_user, $admin_pass,
                 --skip_url_validation \"yes\" \
                 --admin_firstname \"Store\" \
                 --admin_lastname \"Owner\" \
-                --admin_email \"magento@example.com\" \
+                --admin_email \"${admin_email}\" \
                 --admin_username \"${admin_user}\" \
                 --admin_password \"${admin_pass}\"",
             require => [ Exec["setting-permissions"], Exec["create-magentodb-db"], Package["php5-cli"] ],
